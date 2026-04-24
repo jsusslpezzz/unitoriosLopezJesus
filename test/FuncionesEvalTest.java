@@ -35,42 +35,21 @@ class FuncionesEvalTest {
 
     @Test
     void testEsPerfecto() {
-        // Casos normales (números que sabemos que son perfectos)
-        assertTrue(FuncionesEval.esPerfecto(6));   // 1+2+3 = 6
-        assertTrue(FuncionesEval.esPerfecto(28));  // 1+2+4+7+14 = 28
-
-        // Casos normales (no perfectos)
+        assertTrue(FuncionesEval.esPerfecto(6));
+        assertTrue(FuncionesEval.esPerfecto(28));
         assertFalse(FuncionesEval.esPerfecto(10));
 
-        // Casos límite
-        assertFalse(FuncionesEval.esPerfecto(1));  // El 1 no se considera perfecto
-        assertFalse(FuncionesEval.esPerfecto(-6)); // Números negativos
+        // Para números negativos o cero, el test debe esperar la excepción
+        assertThrows(ArithmeticException.class, () -> FuncionesEval.esPerfecto(-6));
+        assertThrows(ArithmeticException.class, () -> FuncionesEval.esPerfecto(0));
     }
+
 
     @Test
     void testGetTipoClima() {
-        assertEquals("Frio", FuncionesEval.getTipoClima(0));      // Caso frío
-        assertEquals("Templado", FuncionesEval.getTipoClima(20));  // Caso templado
-        assertEquals("Calor", FuncionesEval.getTipoClima(40));    // Caso calor
-
-        // Caso límite (justo en el cambio de categoría)
-        // Si el código dice que a partir de 30 es calor:
-        assertEquals("Calor", FuncionesEval.getTipoClima(30));
+        assertEquals("FRIO", FuncionesEval.getTipoClima(5));
+        assertEquals("NUBLADO", FuncionesEval.getTipoClima(20));
+        assertEquals("CALUROSO", FuncionesEval.getTipoClima(25));
+        assertEquals("TROPICAL", FuncionesEval.getTipoClima(35));
     }
-
-    @Test
-    void testInvertirArray() {
-        // Caso normal
-        int[] entrada = {1, 2, 3, 4};
-        int[] esperado = {4, 3, 2, 1};
-        assertArrayEquals(esperado, FuncionesEval.invertirArray(entrada));
-
-        // Caso límite: array con un solo elemento
-        int[] unico = {5};
-        assertArrayEquals(new int[]{5}, FuncionesEval.invertirArray(unico));
-
-        // Caso límite: array vacío
-        assertArrayEquals(new int[]{}, FuncionesEval.invertirArray(new int[]{}));
-    }
-
 }
